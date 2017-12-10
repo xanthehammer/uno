@@ -67,4 +67,8 @@ public class Card {
         return this.value;
     }
 
+    public boolean isWildCard(){
+        return this.color == Color.values()[4];
+    }
+
 }

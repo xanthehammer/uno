@@ -25,12 +25,16 @@ public class Game {
        boolean gameOver = false;
 
        while (!gameOver){
-           //TODO: Check if game over
 
            player1.takeTurn();
+           checkIfGameOver(player1);
+
            player2.takeTurn();
+           checkIfGameOver(player2);
 
            player1.printDeck();
+
+           //TODO: Implement logic for shuffling trash deck when main deck runs out
 
        }
 
@@ -66,6 +70,29 @@ public class Game {
        player1 = new Player(input);
        player2 = new Player("The Computer");
 
+   }
+
+   public boolean checkIfGameOver(Player player){
+       int playerDeckSize = player.deck.getDeckSize();
+
+       if (playerDeckSize == 0){
+           System.out.println(player.getName() + " has won! Game over.");
+           playAgain();
+           return true;
+       }
+
+       return false;
+   }
+
+   public void playAgain(){
+       Scanner scan = new Scanner(System.in);
+       System.out.println("Play again? Type Y for Yes or N for No: ");
+
+       String input = scan.nextLine();
+       if (input.toLowerCase() == "y"){
+           Main.main(new String[0]);
+
+       }
    }
 
 
