@@ -226,13 +226,20 @@ public class Player {
             return 0;
         }
 
+        Card penultimateCard = Game.trashDeck.deck.get(Game.trashDeck.getDeckSize() - 2);
+        int total = 0;
+
+
         if (lastCard.isDrawTwo()){
-            return 2;
+            total += 2;
         }
-        else if (lastCard.isDrawFour()){
-            return 4;
+        if (penultimateCard.isDrawTwo()){
+            total += 2;
         }
-        return 0;
+        if (penultimateCard.isDrawFour()){
+            total += 4;
+        }
+        return total;
     }
 
 
