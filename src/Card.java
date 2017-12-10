@@ -48,7 +48,23 @@ public class Card {
     }
 
     public void printCard(int i){
-        System.out.println(i + ": " + this.color + " " + this.value);
+        String output = "";
+
+        //If summarizing move, we don't want to print out a number choice
+        if (i != 0){
+            output += i + ": ";
+        }
+        output += this.color + " " + this.value;
+
+        System.out.println(output);
+    }
+
+    public Color getColor(){
+        return this.color;
+    }
+
+    public Value getValue(){
+        return this.value;
     }
 
 }

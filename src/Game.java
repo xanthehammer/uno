@@ -29,7 +29,7 @@ public class Game {
 
            player1.takeTurn();
            player2.takeTurn();
-           //TODO: Notify player of computer's move
+
            player1.printDeck();
 
        }

@@ -51,25 +51,35 @@ public class Deck {
 
     }
 
+
     public int getDeckSize(){
         return this.deck.size();
     }
 
+
     //Draws the top card from the main deck and adds it to this deck
     public void draw(){
+        //TODO: Check if pile empty, if so, take top card, shuffle trash deck and make it the main deck
         int lastIndex = Game.mainDeck.getDeckSize() - 1;
         Card lastCard = Game.mainDeck.deck.get(lastIndex);
         Game.mainDeck.deck.remove(lastCard);
         this.deck.add(lastCard);
     }
 
+
     public void move(Card card, Deck originalDeck, Deck newDeck){
         originalDeck.deck.remove(card);
         newDeck.deck.add(card);
     }
 
+
     public void shuffle(){
         Collections.shuffle(this.deck);
+    }
+
+    public Card getLastCardPlayed(){
+        int deckSize = Game.trashDeck.deck.size() - 1;
+        return Game.trashDeck.deck.get(deckSize);
     }
 
 
