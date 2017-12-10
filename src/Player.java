@@ -28,26 +28,45 @@ public class Player {
 
             System.out.println("It's your turn!");
 
+            Card lastCard = (Game.trashDeck.getDeckSize() == 0) ? null : Game.trashDeck.getLastCardPlayed();
+            int numToDraw = mustDraw(lastCard);
+
+            if (numToDraw != 0){
+                System.out.println();
+                System.out.println("The computer's play has required you to draw " + numToDraw + " cards.");
+                System.out.println("We have automatically drawn those cards for you.");
+
+                printDeck();
+
+            }
+
             boolean cardPlayed = false;
             boolean wildCardPlayed = false;
 
             while (!cardPlayed) {
 
-                System.out.println("Enter your play or type 'draw' to draw a card: ");
-                Scanner scan = new Scanner(System.in);
-                String input = scan.nextLine();
+                boolean inputGood = false;
+                String input = "";
 
-                //TODO: Check if input is allowed
+                while (!inputGood){
+                    System.out.println("Enter your play or type 'draw' to draw a card: ");
+                    Scanner scan = new Scanner(System.in);
+                    input = scan.nextLine();
+
+                    //TODO: Check if input is allowed
+                    inputGood = goodInput(input);
+                }
+
+
                 if (input.toLowerCase().equals("draw")){
                     deck.draw();
                     System.out.println();
                     printDeck();
                 }
+
                 else {
 
                     Card choice = this.deck.deck.get((Integer.parseInt(input) - 1));
-
-                    Card lastCard = (Game.trashDeck.getDeckSize() == 0) ? null : Game.trashDeck.getLastCardPlayed();
 
                     //Check if play legal, it's the first card play of game, it's a wildcard, or a wildcard has just been played
                     if (wildCardPlayed || checkIfPlayable(lastCard, choice, choice.isWildCard())) {
@@ -105,10 +124,19 @@ public class Player {
         //Get last card played (last card in trash deck)
         Card lastCardPlayed = Game.trashDeck.getLastCardPlayed();
 
+        int numToDraw = mustDraw(lastCardPlayed);
+        System.out.println(numToDraw);
+
+        if (numToDraw != 0){
+            for (int i = 0; i < numToDraw; i++){
+                deck.draw();
+            }
+        }
+
+
         /*Loop through each card in hand until you find a card
           that matches either the color or value of last card played.
         */
-        //TODO: Implement wildcard play functionality
 
         boolean didPlay = false;
 
@@ -125,8 +153,8 @@ public class Player {
                 if (currentCard.isWildCard()){
                     //For our purposes, we will play the wildcard and then play the first card of the deck
                     //TODO: Improve this logic
-                    playCard(deck.deck.get(i));
                     summarizeMove();
+                    playCard(deck.deck.get(0));
                 }
 
                 //Set flag to indicate we have playable card
@@ -191,5 +219,37 @@ public class Player {
     }
 
 
+    public int mustDraw(Card lastCard){
+
+        if (lastCard == null){
+            return 0;
+        }
+
+        if (lastCard.isDrawTwo()){
+            return 2;
+        }
+        else if (lastCard.isDrawFour()){
+            return 4;
+        }
+        return 0;
+    }
+
+
+    public boolean goodInput(String input){
+
+        if (input.toLowerCase().equals("draw")){
+            return true;
+        }
+
+        else {
+            boolean inputGood = false;
+            for (int i = 1; i <= this.deck.getDeckSize(); i++) {
+                if (Integer.parseInt(input) == i) {
+                    inputGood = true;
+                }
+            }
+            return inputGood;
+        }
+    }
 
 }

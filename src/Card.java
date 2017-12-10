@@ -71,4 +71,17 @@ public class Card {
         return this.color == Color.values()[4];
     }
 
+    public boolean isDrawTwo(){
+        return this.value == Value.values()[12];
+    }
+
+    public boolean isSkip(){
+        return this.value == Value.values()[10];
+    }
+
+    public boolean isDrawFour(){
+        return this.value == Value.values()[14];
+    }
+
+
 }
