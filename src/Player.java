@@ -35,7 +35,9 @@ public class Player {
                 System.out.println();
                 System.out.println("The computer's play has required you to draw " + numToDraw + " cards.");
                 System.out.println("We have automatically drawn those cards for you.");
-
+                for (int i = 0; i < numToDraw; i++){
+                    deck.draw();
+                }
                 printDeck();
 
             }
@@ -53,7 +55,6 @@ public class Player {
                     Scanner scan = new Scanner(System.in);
                     input = scan.nextLine();
 
-                    //TODO: Check if input is allowed
                     inputGood = goodInput(input);
                 }
 
@@ -247,6 +248,10 @@ public class Player {
                 if (Integer.parseInt(input) == i) {
                     inputGood = true;
                 }
+            }
+
+            if (!inputGood){
+                System.out.println("Bad input. Please try again.");
             }
             return inputGood;
         }

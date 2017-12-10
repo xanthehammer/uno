@@ -59,8 +59,13 @@ public class Deck {
 
     //Draws the top card from the main deck and adds it to this deck
     public void draw(){
-        //TODO: Check if pile empty, if so, take top card, shuffle trash deck and make it the main deck
-        int lastIndex = Game.mainDeck.getDeckSize() - 1;
+        //Check if pile empty, if so, take top card, shuffle trash deck and make it the main deck
+        int mainDeckSize = Game.mainDeck.getDeckSize();
+        if (mainDeckSize == 0){
+            replaceMainDeck();
+        }
+
+        int lastIndex = mainDeckSize - 1;
         Card lastCard = Game.mainDeck.deck.get(lastIndex);
         Game.mainDeck.deck.remove(lastCard);
         this.deck.add(lastCard);
@@ -82,5 +87,21 @@ public class Deck {
         return Game.trashDeck.deck.get(deckSize);
     }
 
+    public void replaceMainDeck(){
+        //Move top card in trash deck to new deck
+        Deck newDeck = new Deck();
+        move(getLastCardPlayed(), Game.trashDeck, newDeck);
+
+        //Make trash deck the main deck and shuffle main deck
+        Game.mainDeck = Game.trashDeck;
+        Game.mainDeck.shuffle();
+
+        //Make the new deck the trash deck
+        Game.trashDeck = newDeck;
+
+        System.out.println("Trash deck length: " + Game.trashDeck.getDeckSize());
+        System.out.println("Main deck length: " + Game.mainDeck.getDeckSize());
+
+    }
 
 }
