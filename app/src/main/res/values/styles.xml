@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:colorPrimary">@color/primary_material_light</item>
+        <item name="android:colorForeground">@android:color/background_light</item>
+        <item name="android:colorPrimaryDark">#1976D2</item>
+    </style>
+
+</resources>

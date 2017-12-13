@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Uno</string>
+    <string name="title">uno</string>
+    <string name="developedBy">Developed by Xanthe Hammer.</string>
+    <string name="newGame">NEW GAME</string>
+</resources>

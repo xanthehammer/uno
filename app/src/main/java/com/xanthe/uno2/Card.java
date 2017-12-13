@@ -1,4 +1,5 @@
-import java.util.Arrays;
+package com.xanthe.uno2;
+
 
 public class Card {
 
@@ -40,6 +41,12 @@ public class Card {
 
     Value value;
 
+    public Card(String color, String val){
+        this.color = Color.valueOf(color);
+        this.value = Value.valueOf(val);
+    }
+
+
     Card(int cardColor, int cardValue){
 
         this.color = Color.values()[cardColor - 1];
@@ -47,16 +54,17 @@ public class Card {
 
     }
 
-    public void printCard(int i){
+    public String getCardResource(){
         String output = "";
 
-        //If summarizing move, we don't want to print out a number choice
-        if (i != 0){
-            output += i + ": ";
-        }
-        output += this.color + " " + this.value;
+        output += this.color.toString().toLowerCase() + this.value.toString().toLowerCase();
 
-        System.out.println(output);
+        return output;
+        //String path = "sdcard/camera_app/name.jpg"; img.setImageDrawable(Drawable.createFromPath(path));
+    }
+
+    public String getButtonTag(){
+        return this.color.toString().toUpperCase() + " " + this.value.toString().toUpperCase();
     }
 
     public Color getColor(){

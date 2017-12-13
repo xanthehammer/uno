@@ -1,11 +1,11 @@
-
+package com.xanthe.uno2;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
 
-    ArrayList<Card> deck;
+    public ArrayList<Card> deck;
 
     public Deck(){this.deck = new ArrayList<>();}
 
@@ -58,7 +58,7 @@ public class Deck {
 
 
     //Draws the top card from the main deck and adds it to this deck
-    public void draw(){
+    public Card draw(){
         //Check if pile empty, if so, take top card, shuffle trash deck and make it the main deck
         int mainDeckSize = Game.mainDeck.getDeckSize();
         if (mainDeckSize == 0){
@@ -69,6 +69,8 @@ public class Deck {
         Card lastCard = Game.mainDeck.deck.get(lastIndex);
         Game.mainDeck.deck.remove(lastCard);
         this.deck.add(lastCard);
+
+        return lastCard;
     }
 
 
@@ -99,8 +101,8 @@ public class Deck {
         //Make the new deck the trash deck
         Game.trashDeck = newDeck;
 
-        System.out.println("Trash deck length: " + Game.trashDeck.getDeckSize());
-        System.out.println("Main deck length: " + Game.mainDeck.getDeckSize());
+        //System.out.println("Trash deck length: " + Game.trashDeck.getDeckSize());
+        //System.out.println("Main deck length: " + Game.mainDeck.getDeckSize());
 
     }
 
